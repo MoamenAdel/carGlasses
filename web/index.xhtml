@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="Montaser Kamal Montaser"></h:outputText>
+        </ui:define>    
+        <ui:define name="body">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-car fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><h:outputText value="#{modelController.facade.count()}"/></div>
+                                    <div><h:outputText value="Models !"/></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h:link outcome="#{modelController.prepareList()}">
+                            <div class="panel-footer">
+                                <span class="pull-left"><h:outputText value="ViewDetails"/></span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </h:link>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-car fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge"><h:outputText value="#{carGlassController.facade.count()}"/></div>
+                                    <div><h:outputText value="Car Glasses !"/></div>
+                                </div>
+                            </div>
+                        </div>
+                        <h:link outcome="#{carGlassController.prepareList()}">
+                            <div class="panel-footer">
+                                <span class="pull-left"><h:outputText value="ViewDetails"/></span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </h:link>
+                    </div>
+                </div>
+
+            </div>
+
+        </ui:define>
+    </ui:composition>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

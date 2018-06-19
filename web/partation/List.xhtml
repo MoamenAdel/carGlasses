@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPartationTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <p:messages id="msgs" />
+                <h:outputText escape="false" value="#{bundle.ListPartationEmpty}" rendered="#{partationController.facade.count() == 0}" />
+                <h:panelGroup rendered="#{partationController.facade.count() > 0}">
+                    <p:dataTable value="#{partationController.items}" var="item" emptyMessage="No data found with given criteria"
+                                 filteredValue="#{colorController.filtered}"  lazy="true"          paginator="true" rows="10"  rowsPerPageTemplate="10,50,100">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPartationTitle_name}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPartationTitle_description}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.description}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPartationTitle_code}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.code}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="action"/>
+                            </f:facet>
+                            <h:commandLink action="#{partationController.prepareView}" value="#{bundle.ListPartationViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{partationController.prepareEdit}" value="#{bundle.ListPartationEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{partationController.destroy}" value="#{bundle.ListPartationDestroyLink}"/>
+                        </p:column>
+                        </p:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{partationController.prepareCreate}" value="#{bundle.ListPartationCreateLink}"/>
+                <br />
+                <br />
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

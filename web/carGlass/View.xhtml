@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCarGlassTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="msgs" />
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCarGlassLabel_category}"/>
+                    <h:outputText value="#{carGlassController.selected.category}" title="#{bundle.ViewCarGlassTitle_category}"/>
+                    <h:outputText value="#{bundle.ViewCarGlassLabel_inventory}"/>
+                    <h:outputText value="#{carGlassController.selected.inventory}" title="#{bundle.ViewCarGlassTitle_inventory}"/>
+                    <h:outputText value="#{bundle.ViewCarGlassLabel_model}"/>
+                    <h:outputText value="#{carGlassController.selected.model}" title="#{bundle.ViewCarGlassTitle_model}"/>
+                    <h:outputText value="#{bundle.ViewCarGlassLabel_partation}"/>
+                    <h:outputText value="#{carGlassController.selected.partation}" title="#{bundle.ViewCarGlassTitle_partation}"/>
+                    <h:outputText value="#{bundle.ViewCarGlassLabel_position}"/>
+                    <h:outputText value="#{carGlassController.selected.position}" title="#{bundle.ViewCarGlassTitle_position}"/>
+                    <h:outputText value="#{bundle.ViewCarGlassLabel_qty}"/>
+                    <h:outputText value="#{carGlassController.selected.qty}" title="#{bundle.ViewCarGlassTitle_qty}"/>
+                    <h:outputText value="#{bundle.ViewCarGlassLabel_price}"/>
+                    <h:outputText value="#{carGlassController.selected.price}" title="#{bundle.ViewCarGlassTitle_price}"/>
+                    <h:outputText value="#{bundle.ViewCarGlassLabel_name}"/>
+                    <h:outputText value="#{carGlassController.selected.name}" title="#{bundle.ViewCarGlassTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewCarGlassLabel_description}"/>
+                    <h:outputText value="#{carGlassController.selected.description}" title="#{bundle.ViewCarGlassTitle_description}"/>
+                    <h:outputText value="#{bundle.ViewCarGlassLabel_code}"/>
+                    <h:outputText value="#{carGlassController.selected.code}" title="#{bundle.ViewCarGlassTitle_code}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{carGlassController.destroyAndView}" value="#{bundle.ViewCarGlassDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCarGlassEditLink}"/>
+                <br />
+                <h:commandLink action="#{carGlassController.prepareCreate}" value="#{bundle.ViewCarGlassCreateLink}" />
+                <br />
+                <h:commandLink action="#{carGlassController.prepareList}" value="#{bundle.ViewCarGlassShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCarGlassIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

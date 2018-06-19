@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateCarGlassTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+              <p:messages id="msgs" />
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateCarGlassLabel_category}" for="category" />
+                    <p:selectOneMenu id="category" value="#{carGlassController.selected.category}" converter="categoryConverter" >
+                        <f:selectItems value="#{categoryController.itemsAvailableSelectOne}" />
+                    </p:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateCarGlassLabel_inventory}" for="inventory" />
+                    <p:selectOneMenu id="inventory" value="#{carGlassController.selected.inventory}" converter="inventoryConverter"  >
+                        <f:selectItems value="#{inventoryController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateCarGlassLabel_model}" for="model" />
+                    <p:selectOneMenu id="model" value="#{carGlassController.selected.model}" converter="modelConverter">
+                        <f:selectItems value="#{modelController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateCarGlassLabel_partation}" for="partation" />
+                    <p:selectOneMenu id="partation" value="#{carGlassController.selected.partation}" converter="partationConverter">
+                        <f:selectItems value="#{partationController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateCarGlassLabel_position}" for="position" />
+                    <p:selectOneMenu id="position" value="#{carGlassController.selected.position}"  converter="positionConverter">
+                        <f:selectItems value="#{positionController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateCarGlassLabel_qty}" for="qty" />
+                    <p:inputText id="qty" value="#{carGlassController.selected.qty}" title="#{bundle.CreateCarGlassTitle_qty}" />
+                    <h:outputLabel value="#{bundle.CreateCarGlassLabel_price}" for="price" />
+                    <p:inputText id="price" value="#{carGlassController.selected.price}" title="#{bundle.CreateCarGlassTitle_price}" />
+                    <h:outputLabel value="#{bundle.CreateCarGlassLabel_name}" for="name" />
+                    <p:inputText id="name" value="#{carGlassController.selected.name}" title="#{bundle.CreateCarGlassTitle_name}" />
+                    <h:outputLabel value="#{bundle.CreateCarGlassLabel_description}" for="description" />
+                    <p:inputText id="description" value="#{carGlassController.selected.description}" title="#{bundle.CreateCarGlassTitle_description}" />
+                    <h:outputLabel value="#{bundle.CreateCarGlassLabel_code}" for="code" />
+                    <p:inputText id="code" value="#{carGlassController.selected.code}" title="#{bundle.CreateCarGlassTitle_code}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{carGlassController.create}" value="#{bundle.CreateCarGlassSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{carGlassController.prepareList}" value="#{bundle.CreateCarGlassShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateCarGlassIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

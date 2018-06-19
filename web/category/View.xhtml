@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCategoryTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="msgs" />
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCategoryLabel_name}"/>
+                    <h:outputText value="#{categoryController.selected.name}" title="#{bundle.ViewCategoryTitle_name}"/>
+                    <h:outputText value="#{bundle.ViewCategoryLabel_description}"/>
+                    <h:outputText value="#{categoryController.selected.description}" title="#{bundle.ViewCategoryTitle_description}"/>
+                    <h:outputText value="#{bundle.ViewCategoryLabel_code}"/>
+                    <h:outputText value="#{categoryController.selected.code}" title="#{bundle.ViewCategoryTitle_code}"/>
+
+
+
+                </h:panelGrid>
+                <p:dataTable value="#{categoryController.carGlasses}" var="item" emptyMessage="No data found with given criteria"
+                             paginator="true" rows="10"  rowsPerPageTemplate="10,50,100">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCarGlassTitle_category}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.category}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCarGlassTitle_inventory}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.inventory}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCarGlassTitle_model}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.model}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCarGlassTitle_partation}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.partation}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCarGlassTitle_position}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.position}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCarGlassTitle_qty}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.qty}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCarGlassTitle_price}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.price}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCarGlassTitle_name}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.name}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListCarGlassTitle_code}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.code}"/>
+                    </p:column>
+                </p:dataTable>
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCategoryEditLink}"/>
+                <br />
+                <h:commandLink action="#{categoryController.prepareCreate}" value="#{bundle.ViewCategoryCreateLink}" />
+                <br />
+                <h:commandLink action="#{categoryController.prepareList}" value="#{bundle.ViewCategoryShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCategoryIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

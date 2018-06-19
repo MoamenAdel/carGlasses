@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateModelTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="msgs" />
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateModelLabel_name}" for="name" />
+                    <p:inputText id="name" value="#{modelController.selected.name}" title="#{bundle.CreateModelTitle_name}" />
+                    <h:outputLabel value="#{bundle.CreateModelLabel_description}" for="description" />
+                    <p:inputText id="description" value="#{modelController.selected.description}" title="#{bundle.CreateModelTitle_description}" />
+                    <h:outputLabel value="#{bundle.CreateModelLabel_code}" for="code" />
+                    <p:inputText id="code" value="#{modelController.selected.code}" title="#{bundle.CreateModelTitle_code}" />
+                 
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{modelController.create}" value="#{bundle.CreateModelSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{modelController.prepareList}" value="#{bundle.CreateModelShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateModelIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

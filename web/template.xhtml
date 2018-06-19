@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="description" content=""/>
+        <meta name="author" content=""/>
+
+        <title>Montaser Kamal Montaser</title>
+
+        <!-- Bootstrap Core CSS -->
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+
+        <!-- MetisMenu CSS -->
+        <h:outputStylesheet library="css" name="metisMenu.min.css"/>
+
+        <!-- Custom CSS -->
+        <h:outputStylesheet library="css" name="sb-admin-2.css"/>
+
+        <!-- Custom Fonts -->
+        <h:outputStylesheet library="css" name="font-awesome.min.css"/>
+
+        <!-- jQuery -->
+        <!--        <h:outputScript library="js" name="jquery.min.js"></h:outputScript>-->
+
+        <!-- Bootstrap Core JavaScript -->
+        <h:outputScript library="js" name="bootstrap.min.js"></h:outputScript>
+
+        <!-- Metis Menu Plugin JavaScript -->
+        <h:outputScript library="js" name="metisMenu.min.js"></h:outputScript>
+
+        <!-- Custom Theme JavaScript -->
+        <h:outputScript library="js" name="sb-admin-2.js"></h:outputScript>
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </h:head>
+    <h:body>
+        <div id="wrapper">
+            <h:form>
+                <!-- Navigation -->
+                <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <br/>
+                    </div>
+                    <!-- /.navbar-header -->
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i> <h:outputText value=" #{bundle.UserProfile}"/></a>
+                                </li>
+                                <li class="divider"></li>
+                                <li><h:commandLink action="#{loginBean.logout()}"><i class="fa fa-sign-out fa-fw"></i> <h:outputText value=" #{bundle.Logout}"/></h:commandLink>
+                                </li>
+                            </ul>
+                            <!-- /.dropdown-user -->
+                        </li>
+                        <!-- /.dropdown -->
+                    </ul>
+                    <!-- /.navbar-top-links -->
+
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav navbar-collapse">
+                            <ul class="nav" id="side-menu">
+                                <li>
+
+                                    <h:link  outcome="#{categoryController.prepareList()}">
+                                        <i class='fa fa-pencil-square-o'></i> <h:outputText value="   Categories"/>
+                                    </h:link>
+                                </li>
+                                <li>
+
+                                    <h:link outcome="#{inventoryController.prepareList()}">
+                                        <i class='fa fa-shopping-cart'></i> <h:outputText value="  Inventory"/>
+                                    </h:link>
+
+                                </li>
+                                <li>
+                                    <h:link  outcome="#{modelController.prepareList()}">
+                                        <i class='fa fa-car'></i> <h:outputText value="  Model"/>
+                                    </h:link>
+                                </li>
+                                <li>
+
+                                    <h:link outcome="#{partationController.prepareList()}" >
+                                        <i class='fa fa-flag'></i>  <h:outputText value="  Partation"/>
+                                    </h:link>
+
+                                </li>
+                                <li>
+
+                                    <h:link outcome="#{positionController.prepareList()}">
+                                        <i class='fa fa-toggle-right'></i> <h:outputText value="    Position"/>
+                                    </h:link>
+
+                                </li>
+                                <li>
+
+                                    <h:link outcome="#{carGlassController.prepareList()}">
+                                        <i class='fa fa-car'></i> <h:outputText value="    Car Glasses"/>
+                                    </h:link>
+
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.sidebar-collapse -->
+                    </div>
+                    <!-- /.navbar-static-side -->
+                </nav>
+            </h:form>
+            <!-- Page Content -->
+            <div id="page-wrapper">
+                <div class="row hidden-print">
+                    <div class="col-lg-12">
+                        <h1 class="page-header"><ui:insert name="title">Default Title</ui:insert></h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <ui:insert name="body">Default Body</ui:insert>
+                                    </div>
+                                    <!-- /.col-lg-6 (nested) --> 
+                                </div>
+                                <!-- /.row (nested) -->
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                        <!-- /.panel -->
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /#page-wrapper -->
+
+        </div>
+        <!-- /#wrapper -->
+
+
+    </h:body>
+</html>
+

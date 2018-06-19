@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditPositionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="msgs"/>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditPositionLabel_name}" for="name" />
+                    <p:inputText id="name" value="#{positionController.selected.name}" title="#{bundle.EditPositionTitle_name}" />
+                    <h:outputLabel value="#{bundle.EditPositionLabel_description}" for="description" />
+                    <p:inputText id="description" value="#{positionController.selected.description}" title="#{bundle.EditPositionTitle_description}" />
+                    <h:outputLabel value="#{bundle.EditPositionLabel_code}" for="code" />
+                    <p:inputText id="code" value="#{positionController.selected.code}" title="#{bundle.EditPositionTitle_code}" />
+                </h:panelGrid>
+                <h:commandLink action="#{positionController.update}" value="#{bundle.EditPositionSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditPositionViewLink}"/>
+                <br />
+                <h:commandLink action="#{positionController.prepareList}" value="#{bundle.EditPositionShowAllLink}" immediate="true"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

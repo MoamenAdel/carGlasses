@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateInventoryTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:messages id="msgs" />
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateInventoryLabel_name}" for="name" />
+                    <p:inputText id="name" value="#{inventoryController.selected.name}" title="#{bundle.CreateInventoryTitle_name}" />
+                    <h:outputLabel value="#{bundle.CreateInventoryLabel_description}" for="description" />
+                    <p:inputText id="description" value="#{inventoryController.selected.description}" title="#{bundle.CreateInventoryTitle_description}" />
+                    <h:outputLabel value="#{bundle.CreateInventoryLabel_code}" for="code" />
+                    <p:inputText id="code" value="#{inventoryController.selected.code}" title="#{bundle.CreateInventoryTitle_code}" />
+                 
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{inventoryController.create}" value="#{bundle.CreateInventorySaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{inventoryController.prepareList}" value="#{bundle.CreateInventoryShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateInventoryIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

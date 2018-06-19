@@ -1,0 +1,46 @@
+@media screen{
+    
+       a.print-btn {
+        display: block;
+        background: #48b9a0;
+        width: 300px;
+        padding: 0;
+        height: 80px;
+        line-height: 80px;
+        color: #ffffff;
+        font-size: 17px;
+        text-decoration: none;
+        text-align: center;
+    }
+}
+
+
+@media print {
+
+    body {
+        font-family: Arial;
+        font: 17px 'Roboto Slab', "Helvetica Neue", Helvetica, Arial, sans-serif;
+        
+
+    }
+    @page { margin: 0;
+           
+
+              
+    }
+
+    samboksa{
+        //page-break-after:always;
+        //page-break-inside: avoid;
+        page-break-after: always;
+    }
+
+ a.print-btn {
+        display: none;
+    }
+}
+
+.HeaderGrid.ui-panelgrid>*>tr,
+.HeaderGrid.ui-panelgrid .ui-panelgrid-cell {
+    border: none;
+}
