@@ -19,7 +19,7 @@
                     <h:outputLabel value="#{bundle.EditInventoryLabel_description}" for="description" />
                     <p:inputText id="description" value="#{inventoryController.selected.description}" title="#{bundle.EditInventoryTitle_description}" />
                     <h:outputLabel value="#{bundle.EditInventoryLabel_code}" for="code" />
-                    <p:inputText id="code" value="#{inventoryController.selected.code}" title="#{bundle.EditInventoryTitle_code}" />
+                    <p:inputText id="code" required="true" requiredMessage="Don't forget to add the code"  value="#{inventoryController.selected.code}" title="#{bundle.EditInventoryTitle_code}" />
                 </h:panelGrid>
                 <h:commandLink action="#{inventoryController.update}" value="#{bundle.EditInventorySaveLink}"/>
                 <br />

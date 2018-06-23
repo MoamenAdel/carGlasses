@@ -19,7 +19,7 @@
                     <h:outputLabel value="#{bundle.EditPartationLabel_description}" for="description" />
                     <p:inputText id="description" value="#{partationController.selected.description}" title="#{bundle.EditPartationTitle_description}" />
                     <h:outputLabel value="#{bundle.EditPartationLabel_code}" for="code" />
-                    <p:inputText id="code" value="#{partationController.selected.code}" title="#{bundle.EditPartationTitle_code}" />
+                    <p:inputText id="code" required="true" requiredMessage="Don't forget to add the code"  value="#{partationController.selected.code}" title="#{bundle.EditPartationTitle_code}" />
                 </h:panelGrid>
                 <h:commandLink action="#{partationController.update}" value="#{bundle.EditPartationSaveLink}"/>
                 <br />

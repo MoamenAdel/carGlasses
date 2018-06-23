@@ -19,7 +19,7 @@
                     <h:outputLabel value="#{bundle.CreateInventoryLabel_description}" for="description" />
                     <p:inputText id="description" value="#{inventoryController.selected.description}" title="#{bundle.CreateInventoryTitle_description}" />
                     <h:outputLabel value="#{bundle.CreateInventoryLabel_code}" for="code" />
-                    <p:inputText id="code" value="#{inventoryController.selected.code}" title="#{bundle.CreateInventoryTitle_code}" />
+                    <p:inputText id="code" required="true" requiredMessage="Don't forget to add the code"  value="#{inventoryController.selected.code}" title="#{bundle.CreateInventoryTitle_code}" />
                  
                 </h:panelGrid>
                 <br />

@@ -19,7 +19,7 @@
                     <h:outputLabel value="#{bundle.EditCategoryLabel_description}" for="description" />
                     <p:inputText id="description" value="#{categoryController.selected.description}" title="#{bundle.EditCategoryTitle_description}" />
                     <h:outputLabel value="#{bundle.EditCategoryLabel_code}" for="code" />
-                    <p:inputText id="code" value="#{categoryController.selected.code}" title="#{bundle.EditCategoryTitle_code}" />
+                    <p:inputText id="code" required="true" requiredMessage="Don't forget to add the code"  value="#{categoryController.selected.code}" title="#{bundle.EditCategoryTitle_code}" />
                 </h:panelGrid>
                 <h:commandLink action="#{categoryController.update}" value="#{bundle.EditCategorySaveLink}"/>
                 <br />

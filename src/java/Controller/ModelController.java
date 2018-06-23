@@ -11,6 +11,7 @@ import java.util.Map;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -30,7 +31,7 @@ public class ModelController implements Serializable {
     private Model current;
     private LazyDataModel items = null;
     private List<Model> filtered;
-        private List<CarGlass> carGlasses;
+    private List<CarGlass> carGlasses;
     @EJB
     private ejb.CarGlassFacade carGlassFacade;
     @EJB
@@ -71,15 +72,16 @@ public class ModelController implements Serializable {
 
         };
     }
-   public List<Model> getFiltered() {
+
+    public List<Model> getFiltered() {
         return filtered;
     }
 
     public void setFiltered(List<Model> filtered) {
         this.filtered = filtered;
     }
-    
-      public List<Model> completeModel(String query) {
+
+    public List<Model> completeModel(String query) {
         List<Model> allModels = ejbFacade.findAll();
         List<Model> filtereModels = new ArrayList<Model>();
         if (query == null || query.isEmpty()) {
@@ -130,7 +132,7 @@ public class ModelController implements Serializable {
 
     public String prepareView() {
         current = (Model) getItems().getRowData();
-        carGlasses = carGlassFacade.carGlassByIds( null,null,current.getId(),null,null);
+        carGlasses = carGlassFacade.carGlassByIds(null, null, current.getId(), null, null);
         return "/model/View";
     }
 
@@ -145,6 +147,9 @@ public class ModelController implements Serializable {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ModelCreated"));
             return prepareCreate();
+        } catch (EJBException e) {
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("DublicationError"));
+            return null;
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -216,7 +221,6 @@ public class ModelController implements Serializable {
         return items;
     }
 
-
     private void recreatePagination() {
         pagination = null;
     }
@@ -228,10 +232,10 @@ public class ModelController implements Serializable {
     public SelectItem[] getItemsAvailableSelectOne() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
-    
-        public List<CarGlass> getCarGlasses() {
-        if(carGlasses == null){
-            carGlasses =  new ArrayList<>();
+
+    public List<CarGlass> getCarGlasses() {
+        if (carGlasses == null) {
+            carGlasses = new ArrayList<>();
         }
         return carGlasses;
     }
@@ -239,6 +243,7 @@ public class ModelController implements Serializable {
     public void setCarGlasses(List<CarGlass> carGlasses) {
         this.carGlasses = carGlasses;
     }
+
     public Model getModel(java.lang.Long id) {
         return ejbFacade.find(id);
     }
@@ -278,7 +283,7 @@ public class ModelController implements Serializable {
                 return getStringKey(o.getId());
             } else if (object instanceof String) {
                 return (String) object;
-            }else {
+            } else {
                 throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + Model.class.getName());
             }
         }

@@ -19,7 +19,7 @@
                     <h:outputLabel value="#{bundle.EditPositionLabel_description}" for="description" />
                     <p:inputText id="description" value="#{positionController.selected.description}" title="#{bundle.EditPositionTitle_description}" />
                     <h:outputLabel value="#{bundle.EditPositionLabel_code}" for="code" />
-                    <p:inputText id="code" value="#{positionController.selected.code}" title="#{bundle.EditPositionTitle_code}" />
+                    <p:inputText id="code" required="true" requiredMessage="Don't forget to add the code"  value="#{positionController.selected.code}" title="#{bundle.EditPositionTitle_code}" />
                 </h:panelGrid>
                 <h:commandLink action="#{positionController.update}" value="#{bundle.EditPositionSaveLink}"/>
                 <br />

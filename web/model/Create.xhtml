@@ -19,7 +19,7 @@
                     <h:outputLabel value="#{bundle.CreateModelLabel_description}" for="description" />
                     <p:inputText id="description" value="#{modelController.selected.description}" title="#{bundle.CreateModelTitle_description}" />
                     <h:outputLabel value="#{bundle.CreateModelLabel_code}" for="code" />
-                    <p:inputText id="code" value="#{modelController.selected.code}" title="#{bundle.CreateModelTitle_code}" />
+                    <p:inputText id="code" required="true" requiredMessage="Don't forget to add the code"  value="#{modelController.selected.code}" title="#{bundle.CreateModelTitle_code}" />
                  
                 </h:panelGrid>
                 <br />

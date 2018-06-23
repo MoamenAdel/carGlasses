@@ -11,6 +11,7 @@ import java.util.Map;
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
@@ -146,7 +147,10 @@ public class PositionController implements Serializable {
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("PositionCreated"));
             return prepareCreate();
-        } catch (Exception e) {
+        }  catch(EJBException e){
+             JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("DublicationError"));
+            return null;
+        }catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
         }

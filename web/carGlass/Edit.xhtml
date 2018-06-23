@@ -43,7 +43,7 @@
                     <h:outputLabel value="#{bundle.CreateCarGlassLabel_description}" for="description" />
                     <p:inputText id="description" value="#{carGlassController.selected.description}" title="#{bundle.CreateCarGlassTitle_description}" />
                     <h:outputLabel value="#{bundle.CreateCarGlassLabel_code}" for="code" />
-                    <p:inputText id="code" value="#{carGlassController.selected.code}" title="#{bundle.CreateCarGlassTitle_code}" />
+                    <p:inputText id="code" required="true" requiredMessage="Don't forget to add the code" value="#{carGlassController.selected.code}" title="#{bundle.CreateCarGlassTitle_code}" />
 
                 </h:panelGrid>
                 <h:commandLink action="#{carGlassController.update}" value="#{bundle.EditCarGlassSaveLink}"/>
