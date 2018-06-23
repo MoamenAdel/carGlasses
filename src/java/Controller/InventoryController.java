@@ -86,9 +86,9 @@ public class InventoryController implements Serializable {
         if (query == null || query.isEmpty()) {
             filtereInventorys = allInventorys;
         } else {
-            for (Inventory color : allInventorys) {
-                if (color.getName().toLowerCase().contains(query.toLowerCase())) {
-                    filtereInventorys.add(color);
+            for (Inventory inv : allInventorys) {
+                if (inv.getName().toLowerCase().contains(query.toLowerCase())) {
+                    filtereInventorys.add(inv);
                 }
             }
         }

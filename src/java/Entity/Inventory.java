@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,13 +29,14 @@ public class Inventory implements Serializable {
     private Long id;
     private String name;
     private String description;
+    @Column(unique=true)
     private String code;
-        @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "INVENTORY_ID")
     private List<CarGlass> carGlasses;
 
     public List<CarGlass> getCarGlasses() {
-        if(carGlasses == null){
+        if (carGlasses == null) {
             carGlasses = new ArrayList<CarGlass>();
         }
         return carGlasses;
@@ -97,7 +99,7 @@ public class Inventory implements Serializable {
 
     @Override
     public String toString() {
-       return  getName();
+        return getName();
     }
-    
+
 }
