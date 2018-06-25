@@ -1,9 +1,9 @@
 package Controller;
 
-import Entity.CarGlass;
+import Entity.SalesOrder;
 import Controller.util.JsfUtil;
 import Controller.util.PaginationHelper;
-import ejb.CarGlassFacade;
+import ejb.SalesOrderFacade;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,19 +22,19 @@ import javax.faces.model.SelectItem;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
-@ManagedBean(name = "carGlassController")
+@ManagedBean(name = "salesOrderController")
 @SessionScoped
-public class CarGlassController implements Serializable {
+public class SalesOrderController implements Serializable {
 
-    private CarGlass current;
+    private SalesOrder current;
     private LazyDataModel items = null;
-    private List<CarGlass> filtered;
+    private List<SalesOrder> filtered;
     @EJB
-    private ejb.CarGlassFacade ejbFacade;
+    private ejb.SalesOrderFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public CarGlassController() {
+    public SalesOrderController() {
         items = new LazyDataModel() {
 
             @Override
@@ -68,38 +68,23 @@ public class CarGlassController implements Serializable {
         };
     }
 
-    public List<CarGlass> getFiltered() {
+    public List<SalesOrder> getFiltered() {
         return filtered;
     }
 
-    public void setFiltered(List<CarGlass> filtered) {
+    public void setFiltered(List<SalesOrder> filtered) {
         this.filtered = filtered;
     }
 
-    public List<CarGlass> completeCarGlass(String query) {
-        List<CarGlass> allCarGlasss = ejbFacade.findAll();
-        List<CarGlass> filtereCarGlasss = new ArrayList<CarGlass>();
-        if (query == null || query.isEmpty()) {
-            filtereCarGlasss = allCarGlasss;
-        } else {
-            for (CarGlass cg : allCarGlasss) {
-                if (cg.getName().toLowerCase().contains(query.toLowerCase())) {
-                    filtereCarGlasss.add(cg);
-                }
-            }
-        }
-        return filtereCarGlasss;
-    }
-
-    public CarGlass getSelected() {
+    public SalesOrder getSelected() {
         if (current == null) {
-            current = new CarGlass();
+            current = new SalesOrder();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    public CarGlassFacade getFacade() {
+    public SalesOrderFacade getFacade() {
         return ejbFacade;
     }
 
@@ -122,16 +107,16 @@ public class CarGlassController implements Serializable {
     }
 
     public String prepareList() {
-        return "/carGlass/List";
+        return "/salesOrder/List";
     }
 
     public String prepareView() {
-        current = (CarGlass) getItems().getRowData();
-        return "/carGlass/View";
+        current = (SalesOrder) getItems().getRowData();
+        return "/salesOrder/View";
     }
 
     public String prepareCreate() {
-        current = new CarGlass();
+        current = new SalesOrder();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -139,7 +124,7 @@ public class CarGlassController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CarGlassCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SalesOrderCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -148,14 +133,14 @@ public class CarGlassController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (CarGlass) getItems().getRowData();
+        current = (SalesOrder) getItems().getRowData();
         return "Edit";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CarGlassUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SalesOrderUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -164,7 +149,7 @@ public class CarGlassController implements Serializable {
     }
 
     public String destroy() {
-        current = (CarGlass) getItems().getRowData();
+        current = (SalesOrder) getItems().getRowData();
         performDestroy();
         recreatePagination();
         return "List";
@@ -184,7 +169,7 @@ public class CarGlassController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CarGlassDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("SalesOrderDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -224,21 +209,21 @@ public class CarGlassController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public CarGlass getCarGlass(java.lang.Long id) {
+    public SalesOrder getSalesOrder(java.lang.Long id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = CarGlass.class, value = "carGlassConverter")
-    public static class CarGlassControllerConverter implements Converter {
+    @FacesConverter(forClass = SalesOrder.class, value = "salesOrderConverter")
+    public static class SalesOrderControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CarGlassController controller = (CarGlassController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "carGlassController");
-            return controller.getCarGlass(getKey(value));
+            SalesOrderController controller = (SalesOrderController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "salesOrderController");
+            return controller.getSalesOrder(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -258,11 +243,11 @@ public class CarGlassController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof CarGlass) {
-                CarGlass o = (CarGlass) object;
+            if (object instanceof SalesOrder) {
+                SalesOrder o = (SalesOrder) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + CarGlass.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + SalesOrder.class.getName());
             }
         }
 

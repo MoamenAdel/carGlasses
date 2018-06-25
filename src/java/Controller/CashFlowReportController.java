@@ -1,17 +1,15 @@
 package Controller;
 
-import Entity.CarGlass;
-import Controller.util.JsfUtil;
-import Controller.util.PaginationHelper;
-import ejb.CarGlassFacade;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import Entity.CashFlowReport;
+import ejb.util.JsfUtil;
+import ejb.util.PaginationHelper;
+import ejb.CashFlowReportFacade;
+
 import java.io.Serializable;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -19,87 +17,30 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
-import org.primefaces.model.LazyDataModel;
-import org.primefaces.model.SortOrder;
 
-@ManagedBean(name = "carGlassController")
+@Named("cashFlowReportController")
 @SessionScoped
-public class CarGlassController implements Serializable {
+public class CashFlowReportController implements Serializable {
 
-    private CarGlass current;
-    private LazyDataModel items = null;
-    private List<CarGlass> filtered;
+    private CashFlowReport current;
+    private DataModel items = null;
     @EJB
-    private ejb.CarGlassFacade ejbFacade;
+    private ejb.CashFlowReportFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
 
-    public CarGlassController() {
-        items = new LazyDataModel() {
-
-            @Override
-
-            public List load(int first, int pageSize, String sortField, SortOrder sortOrder, Map filters) {
-
-                List l = getFacade().findRange(first, pageSize, sortField, sortOrder, filters);
-
-                setRowCount(l.size());
-
-                if (l.size() > pageSize) {
-
-                    try {
-
-                        return l.subList(first, first + pageSize);
-
-                    } catch (IndexOutOfBoundsException e) {
-
-                        return l.subList(first, first + (l.size() % pageSize));
-
-                    }
-
-                } else {
-
-                    return l;
-
-                }
-
-            }
-
-        };
+    public CashFlowReportController() {
     }
 
-    public List<CarGlass> getFiltered() {
-        return filtered;
-    }
-
-    public void setFiltered(List<CarGlass> filtered) {
-        this.filtered = filtered;
-    }
-
-    public List<CarGlass> completeCarGlass(String query) {
-        List<CarGlass> allCarGlasss = ejbFacade.findAll();
-        List<CarGlass> filtereCarGlasss = new ArrayList<CarGlass>();
-        if (query == null || query.isEmpty()) {
-            filtereCarGlasss = allCarGlasss;
-        } else {
-            for (CarGlass cg : allCarGlasss) {
-                if (cg.getName().toLowerCase().contains(query.toLowerCase())) {
-                    filtereCarGlasss.add(cg);
-                }
-            }
-        }
-        return filtereCarGlasss;
-    }
-
-    public CarGlass getSelected() {
+    public CashFlowReport getSelected() {
         if (current == null) {
-            current = new CarGlass();
+            current = new CashFlowReport();
             selectedItemIndex = -1;
         }
         return current;
     }
 
-    public CarGlassFacade getFacade() {
+    private CashFlowReportFacade getFacade() {
         return ejbFacade;
     }
 
@@ -122,16 +63,18 @@ public class CarGlassController implements Serializable {
     }
 
     public String prepareList() {
-        return "/carGlass/List";
+        recreateModel();
+        return "/cashFlowReport/List";
     }
 
     public String prepareView() {
-        current = (CarGlass) getItems().getRowData();
-        return "/carGlass/View";
+        current = (CashFlowReport) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        return "/cashFlowReport/View";
     }
 
     public String prepareCreate() {
-        current = new CarGlass();
+        current = new CashFlowReport();
         selectedItemIndex = -1;
         return "Create";
     }
@@ -139,7 +82,7 @@ public class CarGlassController implements Serializable {
     public String create() {
         try {
             getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CarGlassCreated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CashFlowReportCreated"));
             return prepareCreate();
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -148,14 +91,15 @@ public class CarGlassController implements Serializable {
     }
 
     public String prepareEdit() {
-        current = (CarGlass) getItems().getRowData();
+        current = (CashFlowReport) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
 
     public String update() {
         try {
             getFacade().edit(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CarGlassUpdated"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CashFlowReportUpdated"));
             return "View";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
@@ -164,19 +108,23 @@ public class CarGlassController implements Serializable {
     }
 
     public String destroy() {
-        current = (CarGlass) getItems().getRowData();
+        current = (CashFlowReport) getItems().getRowData();
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         performDestroy();
         recreatePagination();
+        recreateModel();
         return "List";
     }
 
     public String destroyAndView() {
         performDestroy();
+        recreateModel();
         updateCurrentItem();
         if (selectedItemIndex >= 0) {
             return "View";
         } else {
             // all items were removed - go back to list
+            recreateModel();
             return "List";
         }
     }
@@ -184,7 +132,7 @@ public class CarGlassController implements Serializable {
     private void performDestroy() {
         try {
             getFacade().remove(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CarGlassDeleted"));
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("CashFlowReportDeleted"));
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
         }
@@ -206,14 +154,30 @@ public class CarGlassController implements Serializable {
     }
 
     public DataModel getItems() {
-//        if (items == null) {
-//            items = getPagination().createPageDataModel();
-//        }
+        if (items == null) {
+            items = getPagination().createPageDataModel();
+        }
         return items;
+    }
+
+    private void recreateModel() {
+        items = null;
     }
 
     private void recreatePagination() {
         pagination = null;
+    }
+
+    public String next() {
+        getPagination().nextPage();
+        recreateModel();
+        return "List";
+    }
+
+    public String previous() {
+        getPagination().previousPage();
+        recreateModel();
+        return "List";
     }
 
     public SelectItem[] getItemsAvailableSelectMany() {
@@ -224,21 +188,21 @@ public class CarGlassController implements Serializable {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), true);
     }
 
-    public CarGlass getCarGlass(java.lang.Long id) {
+    public CashFlowReport getCashFlowReport(java.lang.Long id) {
         return ejbFacade.find(id);
     }
 
-    @FacesConverter(forClass = CarGlass.class, value = "carGlassConverter")
-    public static class CarGlassControllerConverter implements Converter {
+    @FacesConverter(forClass = CashFlowReport.class)
+    public static class CashFlowReportControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            CarGlassController controller = (CarGlassController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "carGlassController");
-            return controller.getCarGlass(getKey(value));
+            CashFlowReportController controller = (CashFlowReportController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "cashFlowReportController");
+            return controller.getCashFlowReport(getKey(value));
         }
 
         java.lang.Long getKey(String value) {
@@ -258,11 +222,11 @@ public class CarGlassController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof CarGlass) {
-                CarGlass o = (CarGlass) object;
+            if (object instanceof CashFlowReport) {
+                CashFlowReport o = (CashFlowReport) object;
                 return getStringKey(o.getId());
             } else {
-                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + CarGlass.class.getName());
+                throw new IllegalArgumentException("object " + object + " is of type " + object.getClass().getName() + "; expected type: " + CashFlowReport.class.getName());
             }
         }
 

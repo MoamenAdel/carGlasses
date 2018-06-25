@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCashFlowReportTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCashFlowReportLabel_stamp}" for="stamp" />
+                    <h:inputText id="stamp" value="#{cashFlowReportController.selected.stamp}" title="#{bundle.EditCashFlowReportTitle_stamp}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditCashFlowReportLabel_timeTo}" for="timeTo" />
+                    <h:inputText id="timeTo" value="#{cashFlowReportController.selected.timeTo}" title="#{bundle.EditCashFlowReportTitle_timeTo}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditCashFlowReportLabel_timeFrom}" for="timeFrom" />
+                    <h:inputText id="timeFrom" value="#{cashFlowReportController.selected.timeFrom}" title="#{bundle.EditCashFlowReportTitle_timeFrom}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditCashFlowReportLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{cashFlowReportController.selected.id}" title="#{bundle.EditCashFlowReportTitle_id}" />
+                </h:panelGrid>
+                <h:commandLink action="#{cashFlowReportController.update}" value="#{bundle.EditCashFlowReportSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCashFlowReportViewLink}"/>
+                <br />
+                <h:commandLink action="#{cashFlowReportController.prepareList}" value="#{bundle.EditCashFlowReportShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCashFlowReportIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -6,12 +6,15 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -33,24 +36,39 @@ public class CarGlass implements Serializable {
 
     //relations
     @ManyToOne
-    @JoinColumn(name = "CATEGORY_ID" )
+    @JoinColumn(name = "CATEGORY_ID")
     private Category category;
 
     @ManyToOne
-    @JoinColumn(name = "INVENTORY_ID" )
+    @JoinColumn(name = "INVENTORY_ID")
     private Inventory inventory;
 
     @ManyToOne
-    @JoinColumn(name = "MODEL_ID" )
+    @JoinColumn(name = "MODEL_ID")
     private Model model;
 
     @ManyToOne
-    @JoinColumn(name = "PARTATION_ID" )
+    @JoinColumn(name = "PARTATION_ID")
     private Partation partation;
 
     @ManyToOne
-    @JoinColumn(name = "POSITION_ID" )
+    @JoinColumn(name = "POSITION_ID")
     private Position position;
+
+    @OneToMany
+    private List<Order_CarGlass> orderDetails;
+
+    public List<Order_CarGlass> getOrderDetails() {
+        if(orderDetails ==null){
+            orderDetails = new ArrayList<Order_CarGlass>();
+        }
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<Order_CarGlass> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
+
 
     public Category getCategory() {
         return category;

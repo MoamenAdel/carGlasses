@@ -86,9 +86,9 @@ public class PartationController implements Serializable {
         if (query == null || query.isEmpty()) {
             filterePartations = allPartations;
         } else {
-            for (Partation color : allPartations) {
-                if (color.getName().toLowerCase().contains(query.toLowerCase())) {
-                    filterePartations.add(color);
+            for (Partation p : allPartations) {
+                if (p.getName().toLowerCase().contains(query.toLowerCase())) {
+                    filterePartations.add(p);
                 }
             }
         }

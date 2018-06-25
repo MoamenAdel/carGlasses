@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditSalesOrderTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditSalesOrderLabel_totalQty}" for="totalQty" />
+                    <h:inputText id="totalQty" value="#{salesOrderController.selected.totalQty}" title="#{bundle.EditSalesOrderTitle_totalQty}" />
+                    <h:outputLabel value="#{bundle.EditSalesOrderLabel_totalPrice}" for="totalPrice" />
+                    <h:inputText id="totalPrice" value="#{salesOrderController.selected.totalPrice}" title="#{bundle.EditSalesOrderTitle_totalPrice}" />
+                    <h:outputLabel value="#{bundle.EditSalesOrderLabel_stamp}" for="stamp" />
+                    <h:inputText id="stamp" value="#{salesOrderController.selected.stamp}" title="#{bundle.EditSalesOrderTitle_stamp}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditSalesOrderLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{salesOrderController.selected.id}" title="#{bundle.EditSalesOrderTitle_id}" />
+                </h:panelGrid>
+                <h:commandLink action="#{salesOrderController.update}" value="#{bundle.EditSalesOrderSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditSalesOrderViewLink}"/>
+                <br />
+                <h:commandLink action="#{salesOrderController.prepareList}" value="#{bundle.EditSalesOrderShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditSalesOrderIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

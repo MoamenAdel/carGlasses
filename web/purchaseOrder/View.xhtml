@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPurchaseOrderTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewPurchaseOrderLabel_totalQty}"/>
+                    <h:outputText value="#{purchaseOrderController.selected.totalQty}" title="#{bundle.ViewPurchaseOrderTitle_totalQty}"/>
+                    <h:outputText value="#{bundle.ViewPurchaseOrderLabel_totalPrice}"/>
+                    <h:outputText value="#{purchaseOrderController.selected.totalPrice}" title="#{bundle.ViewPurchaseOrderTitle_totalPrice}"/>
+                    <h:outputText value="#{bundle.ViewPurchaseOrderLabel_stamp}"/>
+                    <h:outputText value="#{purchaseOrderController.selected.stamp}" title="#{bundle.ViewPurchaseOrderTitle_stamp}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewPurchaseOrderLabel_id}"/>
+                    <h:outputText value="#{purchaseOrderController.selected.id}" title="#{bundle.ViewPurchaseOrderTitle_id}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{purchaseOrderController.destroyAndView}" value="#{bundle.ViewPurchaseOrderDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewPurchaseOrderEditLink}"/>
+                <br />
+                <h:commandLink action="#{purchaseOrderController.prepareCreate}" value="#{bundle.ViewPurchaseOrderCreateLink}" />
+                <br />
+                <h:commandLink action="#{purchaseOrderController.prepareList}" value="#{bundle.ViewPurchaseOrderShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewPurchaseOrderIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -89,9 +89,9 @@ public class CategoryController implements Serializable {
         if (query == null || query.isEmpty()) {
             filtereCategorys = allCategorys;
         } else {
-            for (Category color : allCategorys) {
-                if (color.getName().toLowerCase().contains(query.toLowerCase())) {
-                    filtereCategorys.add(color);
+            for (Category cat : allCategorys) {
+                if (cat.getName().toLowerCase().contains(query.toLowerCase())) {
+                    filtereCategorys.add(cat);
                 }
             }
         }

@@ -87,9 +87,9 @@ public class PositionController implements Serializable {
         if (query == null || query.isEmpty()) {
             filterePositions = allPositions;
         } else {
-            for (Position color : allPositions) {
-                if (color.getName().toLowerCase().contains(query.toLowerCase())) {
-                    filterePositions.add(color);
+            for (Position p : allPositions) {
+                if (p.getName().toLowerCase().contains(query.toLowerCase())) {
+                    filterePositions.add(p);
                 }
             }
         }

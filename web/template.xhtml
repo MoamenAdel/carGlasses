@@ -84,6 +84,16 @@
                             <ul class="nav" id="side-menu">
                                 <li>
 
+                                    <h:link outcome="#{carGlassController.prepareList()}">
+                                        <i class='fa fa-car'></i> <h:outputText value="    Car Glasses"/>
+                                    </h:link>
+
+                                </li>
+                                 <li><a href="#"><i class="fa fa-clone"></i> <h:outputText
+                                            value="   Configuration" /><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                <li>
+
                                     <h:link  outcome="#{categoryController.prepareList()}">
                                         <i class='fa fa-pencil-square-o'></i> <h:outputText value="   Categories"/>
                                     </h:link>
@@ -114,12 +124,27 @@
                                     </h:link>
 
                                 </li>
-                                <li>
-
-                                    <h:link outcome="#{carGlassController.prepareList()}">
-                                        <i class='fa fa-car'></i> <h:outputText value="    Car Glasses"/>
-                                    </h:link>
-
+                            </ul>
+                        </li>
+                                <li><a href="#"><i class="fa fa-clone"></i> <h:outputText
+                                            value="   Orders" /><span class="fa arrow"></span></a>
+                                    <ul class="nav nav-second-level">
+                                        <li>
+                                            <h:link outcome="#{salesOrderController.prepareList()}">
+                                                <i class='fa fa-barcode'></i> <h:outputText value="    Sales Order"/>
+                                            </h:link>
+                                        </li>
+                                        <li>
+                                            <h:link outcome="#{purchaseOrderController.prepareList()}">
+                                                <i class='fa fa-pencil-square-o'></i> <h:outputText value="    Purchase Order"/>
+                                            </h:link>
+                                        </li>
+                                        <li>
+                                            <h:link outcome="#{cashFlowReportController.prepareList()}">
+                                                <i class='fa fa-dollar'></i> <h:outputText value="    Cash Flow"/>
+                                            </h:link>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>

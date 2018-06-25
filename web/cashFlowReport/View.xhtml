@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewCashFlowReportTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewCashFlowReportLabel_stamp}"/>
+                    <h:outputText value="#{cashFlowReportController.selected.stamp}" title="#{bundle.ViewCashFlowReportTitle_stamp}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCashFlowReportLabel_timeTo}"/>
+                    <h:outputText value="#{cashFlowReportController.selected.timeTo}" title="#{bundle.ViewCashFlowReportTitle_timeTo}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCashFlowReportLabel_timeFrom}"/>
+                    <h:outputText value="#{cashFlowReportController.selected.timeFrom}" title="#{bundle.ViewCashFlowReportTitle_timeFrom}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewCashFlowReportLabel_id}"/>
+                    <h:outputText value="#{cashFlowReportController.selected.id}" title="#{bundle.ViewCashFlowReportTitle_id}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{cashFlowReportController.destroyAndView}" value="#{bundle.ViewCashFlowReportDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewCashFlowReportEditLink}"/>
+                <br />
+                <h:commandLink action="#{cashFlowReportController.prepareCreate}" value="#{bundle.ViewCashFlowReportCreateLink}" />
+                <br />
+                <h:commandLink action="#{cashFlowReportController.prepareList}" value="#{bundle.ViewCashFlowReportShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewCashFlowReportIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

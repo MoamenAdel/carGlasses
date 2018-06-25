@@ -87,9 +87,9 @@ public class ModelController implements Serializable {
         if (query == null || query.isEmpty()) {
             filtereModels = allModels;
         } else {
-            for (Model color : allModels) {
-                if (color.getName().toLowerCase().contains(query.toLowerCase())) {
-                    filtereModels.add(color);
+            for (Model mo : allModels) {
+                if (mo.getName().toLowerCase().contains(query.toLowerCase())) {
+                    filtereModels.add(mo);
                 }
             }
         }
